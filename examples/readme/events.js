@@ -18,6 +18,17 @@ async function main() {
     // or:
     //   taskDirectory: `${__dirname}/tasks`,
   });
+  runner.events.on("worker:create", async () => {
+    console.log(`[runner] worker:create`);
+  });
+
+  runner.events.on("worker:stop", async () => {
+    console.log(`[runner] worker:stop`);
+  });
+
+  runner.events.on("stop", async () => {
+    console.log(`[runner] stop`);
+  });
 
   runner.events.on("job:success", ({ worker, job }) => {
     console.log(`Hooray! Worker ${worker.workerId} completed job ${job.id}`);
