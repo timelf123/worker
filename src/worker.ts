@@ -94,8 +94,13 @@ export function makeNewWorker(
     promise,
     getActiveJob: () => activeJob,
   };
+  logger.info(`Event listeners: ${events.listeners("worker:create")}`);
+
+  logger.info("about to fire worker:create");
 
   events.emit("worker:create", { worker, tasks });
+
+  logger.info("fired worker:create");
 
   logger.debug(`Spawned`);
 
